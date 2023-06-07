@@ -1,4 +1,4 @@
-package com.example.stockmarket.search_feature.presentaion
+package com.example.stockmarket.explore_stokes_feature.presentaion
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

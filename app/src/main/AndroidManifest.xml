@@ -13,7 +13,7 @@
         android:theme="@style/Theme.StockMarket"
         tools:targetApi="31">
         <activity
-            android:name=".search_feature.presentaion.MainActivity"
+            android:name=".explore_stokes_feature.presentaion.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.StockMarket">
