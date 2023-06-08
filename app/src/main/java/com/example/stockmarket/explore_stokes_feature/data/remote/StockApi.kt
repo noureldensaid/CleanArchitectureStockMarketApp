@@ -11,6 +11,7 @@ interface StockApi {
         @Query("apikey") apikey: String = API_KEY
     ): ResponseBody
 
+
     companion object {
         const val API_KEY = "PY8ZKZKBPZZLNJM6"
         const val BASE_URL = "https://alphavantage.co"
