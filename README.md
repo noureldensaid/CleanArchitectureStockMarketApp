@@ -1,6 +1,3 @@
-<img src="" hieght="800" width="800">
-<h1 align="center">iNotes</h1>
-
 <p align="center">  
 🗡️ Stock Market App demonstrates modern Android development with Jetpack compose, Caching, SOLID, Hilt, Coroutines, Flow, Jetpack (Room, ViewModel), and Material Design based on the clean architecture pattern with android architecture components. 
 </p>
