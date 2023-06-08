@@ -4,7 +4,7 @@
 </p>
 <p align="center">
 <img src="https://github.com/noureldensaid/CleanArchitectureStockMarketApp/assets/93207605/26940d88-9eb8-4153-ac97-f7ab85396491"
-     , width = "400" , height ="400"
+     , width = "800" , height ="500"
      />
 </p>
 
