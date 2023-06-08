@@ -3,7 +3,9 @@
 🗡️ Stock Market App demonstrates modern Android development with Jetpack compose, Caching, SOLID, Hilt, Coroutines, Flow, Jetpack (Room, ViewModel), and Material Design based on the clean architecture pattern with android architecture components. 
 </p>
 <p align="center">
-<img src="https://github.com/noureldensaid/CleanArchitectureStockMarketApp/assets/93207605/26940d88-9eb8-4153-ac97-f7ab85396491"  />
+<img src="https://github.com/noureldensaid/CleanArchitectureStockMarketApp/assets/93207605/26940d88-9eb8-4153-ac97-f7ab85396491"
+     , width = "400" , height ="400"
+     />
 </p>
 
 ## Tech stack & Open-source libraries
