@@ -18,7 +18,7 @@ class RepositoryImpl @Inject constructor(
     private val api: StockApi,
     private val db: StockDatabase
 ) : Repository {
-    val dao = db.dao
+    private val dao = db.dao
     override suspend fun getCompanyListings(
         fetchFromRemote: Boolean,
         query: String
