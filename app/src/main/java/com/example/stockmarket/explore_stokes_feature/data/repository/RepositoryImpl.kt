@@ -1,7 +1,9 @@
 package com.example.stockmarket.explore_stokes_feature.data.repository
 
+import com.example.stockmarket.explore_stokes_feature.data.csv.CSVParser
 import com.example.stockmarket.explore_stokes_feature.data.local.StockDatabase
 import com.example.stockmarket.explore_stokes_feature.data.mapper.toCompanyListing
+import com.example.stockmarket.explore_stokes_feature.data.mapper.toCompanyListingEntity
 import com.example.stockmarket.explore_stokes_feature.data.remote.StockApi
 import com.example.stockmarket.explore_stokes_feature.domain.model.CompanyListing
 import com.example.stockmarket.explore_stokes_feature.domain.repository.Repository
@@ -16,9 +18,10 @@ import javax.inject.Singleton
 @Singleton
 class RepositoryImpl @Inject constructor(
     private val api: StockApi,
-    private val db: StockDatabase
+    private val db: StockDatabase,
+    private val csvParser: CSVParser<CompanyListing>
+
 ) : Repository {
-    private val dao = db.dao
     override suspend fun getCompanyListings(
         fetchFromRemote: Boolean,
         query: String
@@ -26,7 +29,7 @@ class RepositoryImpl @Inject constructor(
         return flow {
             emit(ResponseState.Loading(true))
 
-            val localListings = dao.searchCompanyListing(query)
+            val localListings = db.dao.searchCompanyListing(query)
             emit(ResponseState.Success(data = localListings.map { it.toCompanyListing() }))
 
             val isDbEmpty = localListings.isEmpty() && query.isBlank()
@@ -39,14 +42,31 @@ class RepositoryImpl @Inject constructor(
             val remoteListing = try {
                 val response = api.getListings()
                 // get parsed csv response
+                csvParser.parse(response.byteStream())
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(ResponseState.Error("Couldn't load data..!"))
+                null
             } catch (e: HttpException) {
                 e.printStackTrace()
                 emit(ResponseState.Error("Couldn't load data..!"))
+                null
             }
 
+            // single source of truth as data always comes from database
+            remoteListing?.let { newListings ->
+                val dao = db.dao
+
+                dao.clearCompanyListing()
+                dao.insertCompanyListing(newListings.map { it.toCompanyListingEntity() })
+
+                emit(ResponseState.Success(
+                    data = dao.searchCompanyListing("").map { it.toCompanyListing() }
+                ))
+                emit(ResponseState.Loading(false))
+
+            }
 
         }
     }
