@@ -20,8 +20,8 @@ class RepositoryImpl @Inject constructor(
     private val api: StockApi,
     private val db: StockDatabase,
     private val csvParser: CSVParser<CompanyListing>
-
 ) : Repository {
+
     override suspend fun getCompanyListings(
         fetchFromRemote: Boolean,
         query: String

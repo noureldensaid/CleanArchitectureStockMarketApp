@@ -9,4 +9,8 @@ import androidx.room.RoomDatabase
 )
 abstract class StockDatabase : RoomDatabase() {
     abstract val dao: StockDao
+
+    companion object {
+        const val DATABASE_NAME = "stock_db"
+    }
 }
