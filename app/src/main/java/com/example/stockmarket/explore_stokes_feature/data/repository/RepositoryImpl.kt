@@ -2,14 +2,19 @@ package com.example.stockmarket.explore_stokes_feature.data.repository
 
 import com.example.stockmarket.explore_stokes_feature.data.csv.CSVParser
 import com.example.stockmarket.explore_stokes_feature.data.local.StockDatabase
+import com.example.stockmarket.explore_stokes_feature.data.mapper.toCompanyInfo
 import com.example.stockmarket.explore_stokes_feature.data.mapper.toCompanyListing
 import com.example.stockmarket.explore_stokes_feature.data.mapper.toCompanyListingEntity
 import com.example.stockmarket.explore_stokes_feature.data.remote.StockApi
+import com.example.stockmarket.explore_stokes_feature.data.remote.dto.CompanyInfoDto
+import com.example.stockmarket.explore_stokes_feature.domain.model.CompanyInfo
 import com.example.stockmarket.explore_stokes_feature.domain.model.CompanyListing
+import com.example.stockmarket.explore_stokes_feature.domain.model.IntradayInfo
 import com.example.stockmarket.explore_stokes_feature.domain.repository.Repository
 import com.example.stockmarket.explore_stokes_feature.util.ResponseState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -69,5 +74,13 @@ class RepositoryImpl @Inject constructor(
             }
 
         }
+    }
+
+    override suspend fun getIntradayInfo(symbol: String): ResponseBody {
+        return api.getIntradayInfo(symbol)
+    }
+
+    override suspend fun getCompanyInfo(symbol: String): CompanyInfo {
+        return api.getCompanyInfo(symbol).toCompanyInfo()
     }
 }
