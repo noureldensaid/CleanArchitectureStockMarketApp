@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.stockmarket.explore_stokes_feature.presentaion.company_Listings.NavGraphs
+import com.example.stockmarket.app_features.NavGraphs
 import com.example.stockmarket.ui.theme.StockMarketTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
